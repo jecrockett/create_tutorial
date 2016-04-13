@@ -1,10 +1,10 @@
 var Main = React.createClass({
   render() {
-    return(
+    return (
       <div>
-        <Header />
+        <Header title={'Creact'} />
         <Body />
       </div>
-    );
+    )
   }
 });

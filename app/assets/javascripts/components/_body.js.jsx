@@ -1,15 +1,15 @@
 var Body = React.createClass({
   getInitialState() {
-    return { skills: [] };
+    return { skills: [] }
   },
 
   componentDidMount() {
-    $.getJSON('/api/v1/skills.json', (response) => { this.setState({skills: response }) });
+    $.getJSON('/api/v1/skills.json', (response) => { this.setState({ skills: response }) });
   },
 
   handleSubmit(skill) {
-    var newState = this.state.skills.concat(skill);
-    this.setState({ skills: newState });
+    let newState = this.state.skills.concat(skill);
+    this.setState({ skills: newState })
   },
 
   handleDelete(id) {
@@ -17,15 +17,16 @@ var Body = React.createClass({
       url: `/api/v1/skills/${id}`,
       type: 'DELETE',
       success: () => {
-        this.removeSkillFromDOM(id);
+        this.removeIdeaFromDOM(id);
       }
     });
   },
 
-  removeSkillFromDOM(id) {
-    var newSkills = this.state.skills.filter((skill) => {
+  removeIdeaFromDOM(id) {
+    let newSkills = this.state.skills.filter((skill) => {
       return skill.id != id;
     });
+
     this.setState({ skills: newSkills });
   },
 
@@ -35,7 +36,7 @@ var Body = React.createClass({
       type: 'PUT',
       data: { skill: skill },
       success: (skill) => {
-        this.updateSkills(skill);
+        this.updateSkills(skill)
       }
     });
   },
@@ -48,11 +49,13 @@ var Body = React.createClass({
   },
 
   render() {
-    return(
+    return (
       <div>
         <NewSkill handleSubmit={this.handleSubmit} />
-        <AllSkills skills={this.state.skills} handleDelete={this.handleDelete} onUpdate={this.handleUpdate}/>
+        <AllSkills skills={this.state.skills}
+                   handleDelete={this.handleDelete}
+                   onUpdate={this.handleUpdate} />
       </div>
-    );
+    )
   }
 });
